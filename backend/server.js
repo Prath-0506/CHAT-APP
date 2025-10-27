@@ -18,26 +18,23 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 
-// API routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-// ---------- Serve Frontend Build ----------
+// Serve frontend build
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, "../frontend/dist");
 
-// Serve the frontend build folder
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-// For any route that’s not an API, send back index.html
+app.use(express.static(frontendPath));
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
-// ------------------------------------------
 
-// Start the server
 app.listen(PORT, () => {
   connectToMongoDB();
   console.log(`✅ Server is running on port ${PORT}`);
 });
+
