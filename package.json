@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "server": "nodemon  backend/server.js"
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && node server.js",
+    "server": "nodemon backend/server.js"
   },
-  "type":"module",
   "keywords": [],
   "author": "",
   "license": "ISC",
